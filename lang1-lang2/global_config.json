@@ -1,0 +1,65 @@
+{
+    "spm": {
+        "PAD_ID": 0,
+        "SOS_ID": 1,
+        "EOS_ID": 2,
+        "UNK_ID": 3,
+        "CONC_ID": 4,
+        "CONC": "<CONC>",
+        "vocab_size": 16000,
+        "model_prefix": "./data/preprocessed/sp16k",
+        "model_file": "./data/preprocessed/sp16k.model",
+        "//": [
+            "Add .en/.ja to the file names to the English/Japanese files respectively.",
+            "Then add .1/.2 to the file names to represent",
+            "`sentence per line`/`context+sentence` respectively.",
+            "eg. English train file containing context and sentence:",
+            "IWSLT17.TED.tst2011.ja-en.en.2"
+        ]
+    },
+    "iwslt17": {
+        "file_name_prefix": {
+            "train": "train.tags.ja-en",
+            "dev": "IWSLT17.TED.dev2010.ja-en",
+            "test": [
+                 "IWSLT17.TED.tst2014.ja-en",
+                 "IWSLT17.TED.tst2010.ja-en"
+            ]
+        },
+        "info_dir": "./data/iwslt2017_orig/ja-en_extracted",
+        "tokenized_dir": "./data/iwslt2017_orig/tokenized" ,
+        "//": [
+            "Add `.en` and `.ja` to the file names",
+            "of the English files and Japanese files respectively.",
+            "eg. English train file: IWSLT17.TED.tst2011.ja-en.en"
+        ],
+        "preprocessor": "./data/iwslt2017_orig/tokenize.sh"
+    },
+    "monolingual": {
+        "language": "japanese",
+        "titile": "kokkai gijiroku"
+    },
+    "backward_model": {
+        "beam_size": 5,
+        "context": "2-to-1",
+        "batch_capacity": 16384
+    },
+    "forward_model": {
+        "data_dir": {
+            "2-to-1": "data/forward_model",
+            "1-to-1": "data/forward_model/1-to-1"
+        },
+        "data": {
+            "monolingual_size": [500, 1000],
+            "maxlen": [160, 160]
+        },
+        "batch_capacity": 16384,
+        "beam_size": 8,
+        "//":[
+            "(file prefix).(language)(.(context))",
+            ".ja: Japanese sentences one per line",
+            ".ja.1: Each line consists of a Japanese sentence with <CONC> in the beginning",
+            ".ja.2: Each line consists of a Japanese context and sentence with <CONC> in between"
+        ]
+    }
+}
