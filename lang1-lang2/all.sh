@@ -116,7 +116,7 @@ if [ -n "${flags[4]}" ]; then
     P="./data/concat/parallel/unfiltered/$BNAME"
     Q="./data/concat/parallel/$BNAME"
 
-    cat $P.src $P.src.1 $P.src.2 $P.trg $P.trg.1 $P.trg.2 | \
+    ./scripts/text_proc/multi_stream_start.sh $P.src $P.src.1 $P.src.2 $P.trg $P.trg.1 $P.trg.2 | \
         python ./scripts/text_proc/multi_ntoken_filter.py \
             --maxlens $MAX1 $MAX1 $MAX2 $MAX1 $MAX1 $MAX2 | \
         python ./scripts/text_proc/multi_write.py \
@@ -201,20 +201,21 @@ if [ -n "${flags[21]}" ]; then
 
     echo 'make concatenated dataset of the generated data' >&2
 
-    S_DOC_CONC='python ./scripts/text_proc/doc_to_concat.py'
+    S_DOC_CONC='python ./scripts/text_proc/concat_w_leader.py'
+    LEADER='./data/concat/monolingual/all.2'
     _SOURCE="./data/back_translated/all"
-    $S_DOC_CONC 0 < $_SOURCE > $tmpd1/all.src
-    $S_DOC_CONC 1 $CONC < $_SOURCE > $tmpd1/all.src.1
-    $S_DOC_CONC 2 $CONC < $_SOURCE > $tmpd1/all.src.2
+    cp $_SOURCE $tmpd1/all.src
+    $S_DOC_CONC $LEADER 1 $CONC < $_SOURCE > $tmpd1/all.src.1
+    $S_DOC_CONC $LEADER 2 $CONC < $_SOURCE > $tmpd1/all.src.2
 
 
     echo 'filter & shuffle' >&2
     SRC="$tmpd1/all.src"
     TRG="./data/concat/monolingual/all"
-    cat $SRC $SRC.1 $SRC.2 $TRG $TRG.1 $TRG.2 | \
+    ./scripts/text_proc/multi_stream_start.sh $SRC $SRC.1 $SRC.2 $TRG $TRG.1 $TRG.2 | \
         python ./scripts/text_proc/multi_ntoken_filter.py \
             --maxlens $MAX1 $MAX1 $MAX2 $MAX1 $MAX1 $MAX2 | \
-        python ./scripts/text_proc/multi_shuffle.py 6 | \
+        python ./scripts/text_proc/multi_shuffle.py | \
         python ./scripts/text_proc/multi_write.py \
             all.src all.src.1 all.src.2 all.trg all.trg.1 all.trg.2 --prefix $tmpd2/
 

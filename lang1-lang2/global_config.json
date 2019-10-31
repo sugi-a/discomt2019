@@ -8,14 +8,7 @@
         "CONC": "<CONC>",
         "vocab_size": 16000,
         "model_prefix": "./data/preprocessed/sp16k",
-        "model_file": "./data/preprocessed/sp16k.model",
-        "//": [
-            "Add .en/.ja to the file names to the English/Japanese files respectively.",
-            "Then add .1/.2 to the file names to represent",
-            "`sentence per line`/`context+sentence` respectively.",
-            "eg. English train file containing context and sentence:",
-            "IWSLT17.TED.tst2011.ja-en.en.2"
-        ]
+        "model_file": "./data/preprocessed/sp16k.model"
     },
     "iwslt17": {
         "file_name_prefix": {
@@ -25,19 +18,7 @@
                  "IWSLT17.TED.tst2014.ja-en",
                  "IWSLT17.TED.tst2010.ja-en"
             ]
-        },
-        "info_dir": "./data/iwslt2017_orig/ja-en_extracted",
-        "tokenized_dir": "./data/iwslt2017_orig/tokenized" ,
-        "//": [
-            "Add `.en` and `.ja` to the file names",
-            "of the English files and Japanese files respectively.",
-            "eg. English train file: IWSLT17.TED.tst2011.ja-en.en"
-        ],
-        "preprocessor": "./data/iwslt2017_orig/tokenize.sh"
-    },
-    "monolingual": {
-        "language": "japanese",
-        "titile": "kokkai gijiroku"
+        }
     },
     "backward_model": {
         "beam_size": 5,
@@ -54,12 +35,6 @@
             "maxlen": [160, 160]
         },
         "batch_capacity": 16384,
-        "beam_size": 8,
-        "//":[
-            "(file prefix).(language)(.(context))",
-            ".ja: Japanese sentences one per line",
-            ".ja.1: Each line consists of a Japanese sentence with <CONC> in the beginning",
-            ".ja.2: Each line consists of a Japanese context and sentence with <CONC> in between"
-        ]
+        "beam_size": 8
     }
 }
