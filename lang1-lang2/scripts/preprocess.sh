@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 cd ${CMTBT_ROOT:?'not found'}
 
@@ -9,4 +9,6 @@ if [ "$1" == "source" ]; then
     $PRE_SP_PP source | spm_encode --model $SPM || exit 1
 elif [ "$1" == "target" ]; then
     $PRE_SP_PP target | spm_encode --model $SPM || exit 1
+else
+    exit 1;
 fi

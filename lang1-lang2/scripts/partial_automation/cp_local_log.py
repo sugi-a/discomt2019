@@ -17,7 +17,7 @@ os.makedirs(dst)
 
 # eval, summary
 for d in ('eval', 'summary'):
-    subprocess.run(['cp', '-r', src + '/' + d, dst])
+    subprocess.run('rsync -r {} {}'.format(src + '/' + d, dst), shell=True)
 
 # checkpoints
 for d in ('checkpoint', 'sup_checkpoint'):
@@ -25,8 +25,8 @@ for d in ('checkpoint', 'sup_checkpoint'):
     _dst = dst + '/' + d
     os.makedirs(_dst)
 
-    # checkpoint
-    subprocess.run(['cp', str(p) + '/checkpoint', _dst])
+    # checkpoint dir
+    subprocess.run('rsync -r {} {}'.format(str(p), _dst), shell=True)
 
     # model files
     cps = list(p.glob('model-*.index'))
@@ -41,7 +41,7 @@ for d in ('checkpoint', 'sup_checkpoint'):
         print(_step)
         assert step == int(_step)
 
-    subprocess.run('cp -r {}/model-{}.* {}'.format(str(p), step, _dst), shell=True)
+    subprocess.run('rsync -r {}/model-{}.* {}'.format(str(p), step, _dst), shell=True)
 
 
 print('done')
