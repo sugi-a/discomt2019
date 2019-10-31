@@ -1,0 +1,3 @@
+[submodule "lang1-lang2/scripts/transformer"]
+	path = lang1-lang2/scripts/transformer
+	url = git@github.com:sugi-a/transformer.git
