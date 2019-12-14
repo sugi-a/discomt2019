@@ -13,3 +13,6 @@
 [submodule "scripts/corpus_formatters"]
 	path = scripts/corpus_formatters
 	url = git@github.com:sugi-a/corpus_formatters.git
+[submodule "corpus_preparation/bookcorpus/--force"]
+	path = corpus_preparation/bookcorpus/--force
+	url = https://github.com/soskek/bookcorpus.git
