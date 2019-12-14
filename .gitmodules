@@ -10,3 +10,6 @@
 [submodule "scripts/mosesdecoder"]
 	path = scripts/mosesdecoder
 	url = https://github.com/moses-smt/mosesdecoder.git
+[submodule "scripts/corpus_formatters"]
+	path = scripts/corpus_formatters
+	url = git@github.com:sugi-a/corpus_formatters.git
