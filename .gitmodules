@@ -16,3 +16,6 @@
 [submodule "corpus_preparation/bookcorpus/--force"]
 	path = corpus_preparation/bookcorpus/--force
 	url = https://github.com/soskek/bookcorpus.git
+[submodule "corpus_preparation/bookcorpus/bookcorpus"]
+	path = corpus_preparation/bookcorpus/bookcorpus
+	url = https://github.com/soskek/bookcorpus.git
