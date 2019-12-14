@@ -1,0 +1,2 @@
+export CMTBT_GROOT=$(cd $(dirname ${BASH_SOURCE:?not found}); pwd)
+echo "Set \$CMTBT_GROOT = $CMTBT_GROOT"
