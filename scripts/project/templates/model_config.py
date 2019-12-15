@@ -42,18 +42,16 @@ IDs2text(IDs)
 validation_metric(global_step, inference)
 """
 
-# Here is an example of the two methods
 
-"""
 import sentencepiece as spm
 sp = spm.SentencePieceProcessor()
 sp.Load(params["vocab"]["source_dict"][:-len("vocab")] + "model")
 
-def IDs2text(IDs):
-    '''
-    IDs: list of list of int
-    Returns: list of sentence'''
-    return [' '.join(sp.id_to_piece(id) for id in sent if not sp.is_control(id)) for sent in IDs]
+#def IDs2text(IDs):
+#    '''
+#    IDs: list of list of int
+#    Returns: list of sentence'''
+#    return [' '.join(sp.id_to_piece(id) for id in sent if not sp.is_control(id)) for sent in IDs]
 
 
 with open(params["train"]["data"]["source_dev"]) as f:
@@ -77,4 +75,3 @@ def validation_metric(global_step, inference):
 
     return corpus_bleu(refs, outs)
 
-"""

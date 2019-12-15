@@ -28,5 +28,5 @@ fi
 if [ -n "${f[3]}" ]; then
     echo 'Extracting documents' >&2
 
-    python ./extract_sentences_from_original_bookcorpus.py < ./original_all.txt > all
+    python ./scripts/extract_sentences_from_original_bookcorpus.py < ./original_all.txt > all
 fi

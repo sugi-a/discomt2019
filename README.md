@@ -15,6 +15,7 @@ This directory contains our source codes and dataset for "Data Augmentation Usin
 README.md # This readme
 activate
 discourse_test_set/
+corpus_preparation/
 scripts/ # language-pair-independent scripts
 experiments/
     l1-l2/ # Template of experiment on a directed language pair
@@ -62,9 +63,15 @@ experiments/
 
 # Run experiments
 
-## 1. Run the activation script in the global root directory
+## 0. Run the activation script in the global root directory
 ```
 source ./activate
+```
+It sets the global root's path into an env var $CMTBT_GROOT.
+
+## 1. Download datasets
+```
+./download_data.sh
 ```
 
 ## 2. Move to the root directory for a language pair (ja-en in this example)
@@ -82,7 +89,7 @@ Note: by default, batch capacity (maximum number of tokens in a batch) is 16384,
 pwd
 output: /path/to/global_root/experiments/ja-en
 ```
-### 1. Prepare dataset
+### 1. Copy dataset
 ```
 ../../scripts/project/all.sh 1
 ```
