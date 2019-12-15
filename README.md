@@ -17,6 +17,7 @@ activate
 discourse_test_set/
 corpus_preparation/
 scripts/ # language-pair-independent scripts
+corpus_preparation/ # Original corpus are downloaded here
 experiments/
     l1-l2/ # Template of experiment on a directed language pair
         global_config.json # Config for this lang-pair
@@ -42,8 +43,7 @@ experiments/
         all.sh # Main shell script run from experiments/l1-l2
 ./experiments/l1-l2/
     data/
-        original/ # Original corpora
-        extracted/ # Sentences extracted from the original corpora
+        raw/ # Sentences extracted from the original corpora
         preprocessed/ # Preprocessed corpora
         concat/ # Concatenated preprocessed corpora
         back_translated/ # Back-translated monolingual corpus
@@ -63,20 +63,54 @@ experiments/
 
 # Run experiments
 
-## 0. Run the activation script in the global root directory
+## Set the environment variables for the whole project
 ```
 source ./activate
 ```
-It sets the global root's path into an env var $CMTBT_GROOT.
+This sets the global root's path into an env var $CMTBT_GROOT.
+You have to do this every time you open a new terminal window.
 
-## 1. Download datasets
+## Download datasets and extract sentences
 ```
-./download_data.sh
+./corpus_preparation/download_data.sh
 ```
+By this command, the following corpora are downloaded and sentences are extracted (like removing xml tags and gathering sentences in multiple files into a single file)
 
-## 2. Move to the root directory for a language pair (ja-en in this example)
+1. IWSLT2017 en-ja and en-fr
+1. Europarl v7
+    - fr sentences are gathered into a single file
+1. Japanese diet corpus
+1. Bookcorpus
+    - Download is done using https://github.com/soskek/bookcorpus
+    - This would take much time
+
+Note: Blank lines are inserted at the document boundaries
+
+## Run experiments on a (directed) language pair
+
+
+### Introduction
+Procedure to conduct training and evaluation of back-translation and data-augmented forward translation models.
+
+By default, environments for 4 language pairs are prepared:
+
+- en->ja : ./experiments/en-ja
+- ja->en : ./experiments/ja-en
+- en->fr : ./experiments/en-fr
+- fr->en : ./experiments/fr-en
+
+You can make your own by copying ./experiments/l1-l2 and modifying
+
+- global_config.json
+- scripts/preprocess.sh
+- scripts/copy_dataset.sh
+
+----
+
+### 0. Move to the lang pair's experiment dir
+Move to the root directory for experiment of a language pair (ja-en in the following examples)
 ```
-cd ./experiments/ja-en # move to the ja-en root dir
+cd ./experiments/ja-en
 ```
 
 global_config.json is placed in every language pair's root directory.
@@ -84,20 +118,15 @@ You can edit it to modify settings like vocabulary size, variation in pseudo dat
 
 Note: by default, batch capacity (maximum number of tokens in a batch) is 16384, which is compatible with GPUs with 24GB RAM in total (e.g. two Titan X GPUs).
 
-## 3. Run `all.sh`
 ```
 pwd
-output: /path/to/global_root/experiments/ja-en
+#output: /path/to/global_root/experiments/ja-en
 ```
 ### 1. Copy dataset
 ```
 ../../scripts/project/all.sh 1
 ```
-In this process,
-
-- The original corpora are downloaded into ./data/original
-- Sentences are extracted and saved into ./data/extracted
-    - Blank lines should be inserted at the document boundaries
+IWSLT2017 en-ja and Japanese diet corpus are copied from /global_root/corpus_preparation/
 
 ### 2. Train preprocessor
 ```

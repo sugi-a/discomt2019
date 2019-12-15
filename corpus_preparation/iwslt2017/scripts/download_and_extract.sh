@@ -7,20 +7,20 @@ mkdir -p data
 
 echo 'Downloading IWSLT2017 en-fr' >&2
 
-#(
-#mkdir -p ./data/original
-#cd ./data/original
-#wget "https://wit3.fbk.eu/archive/2017-01-trnted//texts/en/fr/en-fr.tgz" -O en-fr.tgz
-#tar -xzvf en-fr.tgz
-#)
-#
-#echo 'Downloading IWSLT2017 en-ja' >&2
-#(
-#mkdir -p ./data/original
-#cd ./data/original
-#wget "https://wit3.fbk.eu/archive/2017-01-trnted//texts/en/ja/en-ja.tgz" -O en-ja.tgz
-#tar -xzvf en-ja.tgz
-#)
+(
+mkdir -p ./data/original
+cd ./data/original
+wget "https://wit3.fbk.eu/archive/2017-01-trnted//texts/en/fr/en-fr.tgz" -O en-fr.tgz
+tar -xzvf en-fr.tgz
+)
+
+echo 'Downloading IWSLT2017 en-ja' >&2
+(
+mkdir -p ./data/original
+cd ./data/original
+wget "https://wit3.fbk.eu/archive/2017-01-trnted//texts/en/ja/en-ja.tgz" -O en-ja.tgz
+tar -xzvf en-ja.tgz
+)
 
 
 echo 'Extracting sentences' >&2

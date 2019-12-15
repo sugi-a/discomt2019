@@ -7,19 +7,19 @@ done
 
 # Check global_config.json
 GCONF="./global_config.json"
-[ -e $GCONF ]
+[ -e $GCONF ] || { echo './global_config.json not found' >&2; exit 1; }
 
 # Check if the global root dir is registered
-[ -n "$CMTBT_GROOT" ]
+echo "Global root dir: ${CMTBT_GROOT?not found. You must call \`source ./activate\` in the global root directory}"
 
 # Directory of the global scripts (scripts shared among different experiments for different language pairs)
 GSCRIPTS=${CMTBT_GROOT?not found}/scripts
 
 
-# Extract sentences from the original corpus
+# Copy datasets
 if [ -n "${flags[1]}" ]; then
-    mkdir -p ./data/extracted/{monolingual,parallel}
-    ./scripts/extract_corpora.sh
+    mkdir -p ./data/raw/{monolingual,parallel}
+    ./scripts/copy_dataset.sh
 fi
 
 # Train preprocessing pipelines
@@ -33,8 +33,8 @@ if [ -n "${flags[2]}" ] ; then
 
     # pre-spm-preprocessing (src)
     TRAIN_BNAME=$(jq -r '.iwslt17.file_name_prefix.train' < $GCONF)
-    SRC_TRAIN=./data/extracted/parallel/${TRAIN_BNAME}.src
-    TRG_TRAIN=./data/extracted/parallel/${TRAIN_BNAME}.trg
+    SRC_TRAIN=./data/raw/parallel/${TRAIN_BNAME}.src
+    TRG_TRAIN=./data/raw/parallel/${TRAIN_BNAME}.trg
     TMPD=$(mktemp -d __XXXXXX)
 
     ./scripts/preprocess.sh _source < $SRC_TRAIN > $TMPD/__src &
@@ -63,7 +63,7 @@ if [ -n "${flags[3]}" ]; then
     # Preprocess the monolingual corpus in parallel
     {
         tmpd=$(mktemp -d)
-        split -n l/4 ./data/extracted/monolingual/all.trg $tmpd/__
+        split -n l/4 ./data/raw/monolingual/all.trg $tmpd/__
         for f in $tmpd/__*; do
             $PREPRO target < $f > $tmpd/x$(basename $f) &
         done; wait
@@ -72,10 +72,10 @@ if [ -n "${flags[3]}" ]; then
     }
 
     echo 'Preprocessing parallel corpus' 1>&2
-    for f in ./data/extracted/parallel/*.trg ; do
+    for f in ./data/raw/parallel/*.trg ; do
         $PREPRO target < $f > ./data/preprocessed/parallel/$(basename $f) &
     done
-    for f in ./data/extracted/parallel/*.src ; do
+    for f in ./data/raw/parallel/*.src ; do
         $PREPRO source < $f > ./data/preprocessed/parallel/$(basename $f) &
     done
     wait
