@@ -1,0 +1,44 @@
+{
+    "spm": {
+        "PAD_ID": 0,
+        "SOS_ID": 1,
+        "EOS_ID": 2,
+        "UNK_ID": 3,
+        "CONC_ID": 4,
+        "CONC": "<CONC>",
+        "vocab_size": 16000,
+        "model_prefix": "./data/preprocessed/sp16k",
+        "model_file": "./data/preprocessed/sp16k.model"
+    },
+    "iwslt17": {
+        "file_name_prefix": {
+            "train": "train",
+            "dev": "dev2010",
+            "test": [
+                "tst2010",
+                "tst2011",
+                "tst2012",
+                "tst2013",
+                "tst2014",
+                "tst2015"
+            ]
+        }
+    },
+    "backward_model": {
+        "beam_size": 1,
+        "context": "2-to-1",
+        "batch_capacity": 8192
+    },
+    "forward_model": {
+        "data_dir": {
+            "2-to-1": "data/forward_model",
+            "1-to-1": "data/forward_model/1-to-1"
+        },
+        "data": {
+            "monolingual_size": [500, 1000, 2000],
+            "maxlen": [160, 160]
+        },
+        "batch_capacity": 16384,
+        "beam_size": 8
+    }
+}

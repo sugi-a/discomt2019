@@ -24,14 +24,14 @@ echo 'Copying parallel corpus' >&2
 
 SRC_DIR="$CMTBT_GROOT/corpus_preparation/iwslt2017/data/extracted/en-ja"
 DEST_DIR="./data/raw/parallel"
-EXT_BEFORE=("en" "ja")
+EXT_BEFORE=("ja" "en")
 EXT_AFTER=("src" "trg")
 
 for i in 0 1; do
     l=${EXT_BEFORE[$i]}
     role=${EXT_AFTER[$i]}
 
-    for f in $SRC_DIR/IWSLT17.TED.dev2010.en-ja.$l; do
+    for f in $SRC_DIR/IWSLT17.TED.dev2010.*.$l; do
         cp $f $DEST_DIR/dev2010.$role
     done
 
@@ -47,4 +47,4 @@ done
 
 # Monolingual
 echo 'Copying monolingual corpus' >&2
-cp $CMTBT_GROOT/corpus_preparation/ja_diet_corpus/data/all ./data/raw/monolingual/all.trg
+head -n 8000000 $CMTBT_GROOT/corpus_preparation/ja_diet_corpus/data/all > ./data/raw/monolingual/all.trg

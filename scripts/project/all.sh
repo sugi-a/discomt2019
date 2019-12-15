@@ -24,10 +24,10 @@ fi
 
 # Train preprocessing pipelines
 if [ -n "${flags[2]}" ] ; then
-#    mkdir -p ./data/preprocessed/{monolingual,parallel}
-#    
-#    echo 'Training pre-sentencepiece preprocessors' >&2
-#    ./scripts/preprocess.sh train
+    mkdir -p ./data/preprocessed/{monolingual,parallel}
+    
+    echo 'Training pre-sentencepiece preprocessors' >&2
+    ./scripts/preprocess.sh train
 
     echo 'Pre-sentencepiece preprocessing'
 

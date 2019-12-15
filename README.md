@@ -99,11 +99,13 @@ By default, environments for 4 language pairs are prepared:
 - en->fr : ./experiments/en-fr
 - fr->en : ./experiments/fr-en
 
-You can make your own by copying ./experiments/l1-l2 and modifying
+You can make your own by copying
 
-- global_config.json
-- scripts/preprocess.sh
-- scripts/copy_dataset.sh
+- ./experiments/l1-l2/global_config.json
+- ./experiments/l1-l2/scripts/preprocess.sh
+- ./experiments/l1-l2/scripts/copy_dataset.sh
+
+into the new directory and modify them as you like.
 
 ----
 

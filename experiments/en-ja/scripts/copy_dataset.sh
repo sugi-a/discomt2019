@@ -11,7 +11,7 @@ The copied (newly saved) files must be named following the rules below
         - ".trg" for the target language files
 - Monolingual Corpus
     - The monolingual corpus file name must be "all.trg"
-" > /dev/null
+"
 
 # Below is an example of copying files for the en->ja experiment.
 

@@ -1,6 +1,3 @@
-[submodule "lang1-lang2/scripts/transformer"]
-	path = lang1-lang2/scripts/transformer
-	url = git@github.com:sugi-a/transformer.git
 [submodule "scripts/transformer"]
 	path = scripts/transformer
 	url = git@github.com:sugi-a/transformer.git
@@ -13,9 +10,6 @@
 [submodule "scripts/corpus_formatters"]
 	path = scripts/corpus_formatters
 	url = git@github.com:sugi-a/corpus_formatters.git
-[submodule "corpus_preparation/bookcorpus/--force"]
-	path = corpus_preparation/bookcorpus/--force
-	url = https://github.com/soskek/bookcorpus.git
 [submodule "corpus_preparation/bookcorpus/bookcorpus"]
 	path = corpus_preparation/bookcorpus/bookcorpus
 	url = https://github.com/soskek/bookcorpus.git
