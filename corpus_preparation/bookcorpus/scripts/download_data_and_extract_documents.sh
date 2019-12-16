@@ -2,6 +2,7 @@
 
 cd $(dirname $0)/..
 
+./scripts/make_py3_venv_for_crawler_requirements.sh
 source ./bookcorpus_venv/bin/activate
 
 f=()
