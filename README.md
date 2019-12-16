@@ -1,6 +1,8 @@
 # Introduction
 This directory contains our source codes and dataset for "Data Augmentation Using Back-translation for Context-aware Neural Machine Translation" presented in DiscoMT 2019.
 
+2019/12/15: Performed a large refactering
+
 # Prerequisite
 - python 3.6.8
     - tensorflow 1.12.0
