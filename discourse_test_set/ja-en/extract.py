@@ -2,7 +2,7 @@ import os, sys, csv
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-with open('./testset.csv') as f:
+with open('testset.csv') as f:
     reader = csv.reader(f)
 
     with open('testset.txt', 'w') as df:
